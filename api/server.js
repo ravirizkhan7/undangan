@@ -34,26 +34,34 @@ if (dbUrl) {
     });
     db = drizzle(pool);
     
-    // Auto-migrate tabel ke Neon Singapore
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS ucapan (
-          id SERIAL PRIMARY KEY,
-          nama VARCHAR(255) NOT NULL,
-          komentar TEXT NOT NULL,
-          kehadiran BOOLEAN NOT NULL,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-      );
-    `);
-    console.log('Database initialized successfully');
+    // Membungkus query ke async function agar build Vercel TIDAK ERROR (No Top-Level Await Build Crash)
+    const initDb = async () => {
+      try {
+        await pool.query(`
+          CREATE TABLE IF NOT EXISTS ucapan (
+              id SERIAL PRIMARY KEY,
+              nama VARCHAR(255) NOT NULL,
+              komentar TEXT NOT NULL,
+              kehadiran BOOLEAN NOT NULL,
+              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+          );
+        `);
+        console.log('Database initialized successfully');
+      } catch (tableErr) {
+        console.error('Failed to create table:', tableErr);
+      }
+    };
+    initDb();
+
   } catch (err) {
     console.error('Failed to initialize database:', err);
   }
+} else {
+  console.warn('WARNING: DATABASE_URL is not set.');
 }
 
-// === PERBAIKAN RUTE DI SINI (Menyesuaikan Proxy Serverless Vercel) ===
-// Kita gunakan rute Express fleksibel agar mendeteksi baik dengan prefiks /api maupun tidak
-
-app.get(['/api/ucapan', '/ucapan'], async (req, res) => {
+// API Routes
+app.get('/api/ucapan', async (req, res) => {
   if (!db) return res.status(500).json({ error: 'Database not configured' });
   try {
     const data = await db.select().from(ucapan).orderBy(desc(ucapan.createdAt));
@@ -64,7 +72,7 @@ app.get(['/api/ucapan', '/ucapan'], async (req, res) => {
   }
 });
 
-app.post(['/api/ucapan', '/ucapan'], async (req, res) => {
+app.post('/api/ucapan', async (req, res) => {
   if (!db) return res.status(500).json({ error: 'Database not configured' });
   try {
     const { nama, komentar, kehadiran } = req.body;
@@ -85,15 +93,19 @@ app.post(['/api/ucapan', '/ucapan'], async (req, res) => {
   }
 });
 
-// SERVE STATIC FILE LANGSUNG DARI ROOT FOLDER SEPERTI SETTINGAN AWAL LU
+// Serve static file dari Root Folder (Gunakan rootPath secara konsisten)
 const rootPath = process.cwd();
 app.use(express.static(rootPath));
 
 app.get('*', (req, res) => {
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API Route Not Found' });
+  }
+  // FIX: Mengganti distPath yang typo menjadi rootPath agar index.html terbaca
   res.sendFile(path.join(rootPath, 'index.html'));
 });
 
-// Jalankan jika di lokal
+// Jalankan port jika di lokal
 if (process.env.VERCEL !== '1') {
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
