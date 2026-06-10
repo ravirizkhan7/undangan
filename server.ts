@@ -16,13 +16,14 @@ export const ucapan = pgTable('ucapan', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
+// Deklarasikan instance Express di luar function agar bisa di-export untuk Vercel Serverless Runtime
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
 async function startServer() {
-  const app = express();
-  const PORT = 3000;
-
-  app.use(cors());
-  app.use(express.json());
-
   // Database Connection
   const dbUrl = process.env.DATABASE_URL;
   let db: ReturnType<typeof drizzle> | null = null;
@@ -35,7 +36,7 @@ async function startServer() {
       });
       db = drizzle(pool);
       
-      // Auto-migrate table
+      // Auto-migrate table ke Neon Singapore
       await pool.query(`
         CREATE TABLE IF NOT EXISTS ucapan (
             id SERIAL PRIMARY KEY,
@@ -86,24 +87,37 @@ async function startServer() {
     }
   });
 
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
+  // Routing Static File: Deteksi apakah berjalan di Serverless Vercel atau Local Dev
+  if (process.env.VERCEL === '1' || process.env.NODE_ENV === 'production') {
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
+    
+    app.get('*', (req, res) => {
+      // Mencegah API routing nyasar nge-serve HTML
+      if (req.path.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API Route Not Found' });
+      }
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  } else {
+    // Mode Sandbox AI Studio / Local Development biasa
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+  // Hanya jalankan app.listen jika TIDAK sedang dideploy di Serverless Vercel
+  if (process.env.VERCEL !== '1') {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }
 }
 
+// Jalankan inisialisasi database dan routing middleware
 startServer();
+
+// Wajib diexport agar dibaca dengan benar oleh vercel.json -> @vercel/node
+export default app;
