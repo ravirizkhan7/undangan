@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { pgTable, serial, text, timestamp, boolean, varchar } from 'drizzle-orm/pg-core';
 import { desc } from 'drizzle-orm';
@@ -17,7 +16,6 @@ export const ucapan = pgTable('ucapan', {
 });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -34,7 +32,7 @@ if (dbUrl) {
     });
     db = drizzle(pool);
     
-    // Membungkus query ke async function agar build Vercel TIDAK ERROR (No Top-Level Await Build Crash)
+    // Auto-migrate tabel ke Neon Singapore
     const initDb = async () => {
       try {
         await pool.query(`
@@ -56,12 +54,10 @@ if (dbUrl) {
   } catch (err) {
     console.error('Failed to initialize database:', err);
   }
-} else {
-  console.warn('WARNING: DATABASE_URL is not set.');
 }
 
-// API Routes
-app.get('/api/ucapan', async (req, res) => {
+// API Routes (Mendukung hit dari proxy Vercel)
+app.get(['/api/ucapan', '/ucapan'], async (req, res) => {
   if (!db) return res.status(500).json({ error: 'Database not configured' });
   try {
     const data = await db.select().from(ucapan).orderBy(desc(ucapan.createdAt));
@@ -72,7 +68,7 @@ app.get('/api/ucapan', async (req, res) => {
   }
 });
 
-app.post('/api/ucapan', async (req, res) => {
+app.post(['/api/ucapan', '/ucapan'], async (req, res) => {
   if (!db) return res.status(500).json({ error: 'Database not configured' });
   try {
     const { nama, komentar, kehadiran } = req.body;
@@ -93,22 +89,11 @@ app.post('/api/ucapan', async (req, res) => {
   }
 });
 
-// Serve static file dari Root Folder (Gunakan rootPath secara konsisten)
-const rootPath = process.cwd();
-app.use(express.static(rootPath));
-
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api/')) {
-    return res.status(404).json({ error: 'API Route Not Found' });
-  }
-  // FIX: Mengganti distPath yang typo menjadi rootPath agar index.html terbaca
-  res.sendFile(path.join(rootPath, 'index.html'));
-});
-
-// Jalankan port jika di lokal
+// Jalankan port jika running di lokal (bukan Vercel)
 if (process.env.VERCEL !== '1') {
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log('Server running on port ' + PORT);
   });
 }
 
