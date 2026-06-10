@@ -86,15 +86,19 @@ app.post('/api/ucapan', async (req, res) => {
 });
 
 // Serve static file hasil build Vite (DIJAMIN TANPA COMPILER VITE / ROLLUP)
-const distPath = path.join(process.cwd(), 'dist');
-app.use(express.static(distPath));
+// const distPath = path.join(process.cwd(), 'dist');
+// app.use(express.static(distPath));
 
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api/')) {
-    return res.status(404).json({ error: 'API Route Not Found' });
-  }
-  res.sendFile(path.join(distPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   if (req.path.startsWith('/api/')) {
+//     return res.status(404).json({ error: 'API Route Not Found' });
+//   }
+//   res.sendFile(path.join(distPath, 'index.html'));
+// });
+
+    app.use('/api/*', (req, res) => {
+        res.status(404).json({ error: 'API Route Not Found' });
+    });
 
 // Jalankan port jika di lokal
 if (process.env.VERCEL !== '1') {
