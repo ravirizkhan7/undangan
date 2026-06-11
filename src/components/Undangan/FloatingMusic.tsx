@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Music, Pause } from 'lucide-react';
 import { motion } from 'motion/react';
+import bgsound from '../../../assets/bg-sound.mp3';
 
 export default function FloatingMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -9,7 +10,7 @@ export default function FloatingMusic() {
   useEffect(() => {
     // We create a dummy audio element. 
     // In a real app, you would set src to your actual audio file.
-    audioRef.current = new Audio('../../../assets/bg-sound.mp3');
+    audioRef.current = new Audio(bgsound);
     audioRef.current.loop = true;
 
     return () => {
