@@ -9,7 +9,7 @@ export default function FloatingMusic() {
   useEffect(() => {
     // We create a dummy audio element. 
     // In a real app, you would set src to your actual audio file.
-    audioRef.current = new Audio('https://www.soundhelix.com/architecture/Audio/SoundHelix-Song-1.mp3');
+    audioRef.current = new Audio('../../../assets/bg-sound.mp3');
     audioRef.current.loop = true;
 
     return () => {
