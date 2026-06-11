@@ -6,35 +6,69 @@ import bgsound from '../../../assets/bg-sound.mp3';
 export default function FloatingMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const autoplayFallbackRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
-    // We create a dummy audio element. 
-    // In a real app, you would set src to your actual audio file.
     audioRef.current = new Audio(bgsound);
     audioRef.current.loop = true;
 
+    // Coba autoplay langsung
+    audioRef.current.play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {
+        // Browser block autoplay → tunggu interaksi pertama user
+        const handleFirstInteraction = () => {
+          if (audioRef.current && !audioRef.current.paused === false) {
+            audioRef.current.play()
+              .then(() => setIsPlaying(true))
+              .catch(() => {});
+          }
+          document.removeEventListener('click', handleFirstInteraction);
+          document.removeEventListener('touchstart', handleFirstInteraction);
+          autoplayFallbackRef.current = null;
+        };
+
+        autoplayFallbackRef.current = handleFirstInteraction;
+        document.addEventListener('click', handleFirstInteraction);
+        document.addEventListener('touchstart', handleFirstInteraction);
+      });
+
     return () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-        }
-    }
+      audioRef.current?.pause();
+      // Cleanup fallback listener kalau masih terpasang
+      if (autoplayFallbackRef.current) {
+        document.removeEventListener('click', autoplayFallbackRef.current);
+        document.removeEventListener('touchstart', autoplayFallbackRef.current);
+      }
+    };
   }, []);
 
   const togglePlay = () => {
     if (!audioRef.current) return;
-    
+
+    // Kalau user klik button dan fallback listener masih aktif, hapus dulu
+    if (autoplayFallbackRef.current) {
+      document.removeEventListener('click', autoplayFallbackRef.current);
+      document.removeEventListener('touchstart', autoplayFallbackRef.current);
+      autoplayFallbackRef.current = null;
+    }
+
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
       audioRef.current.play().catch(e => console.error("Audio playback failed", e));
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (
-    <div className="fixed top-6 left-0 right-0 px-6 z-50 flex justify-between items-start pointer-events-none">
+    // ✅ z-[9999] biar pasti di depan semua elemen
+    <div className="fixed top-6 left-0 right-0 px-6 z-[9999] flex justify-between items-start pointer-events-none">
       {/* Badge "Exclusive Preview" */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
