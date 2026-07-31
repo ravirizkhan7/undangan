@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Music, Pause } from 'lucide-react';
-// import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 import bgsound from '../../../assets/bg-sound.mp3';
 
 export default function FloatingMusic() {
