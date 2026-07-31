@@ -1,22 +1,39 @@
 import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { pgTable, serial, text, timestamp, boolean, varchar } from 'drizzle-orm/pg-core';
-import { desc } from 'drizzle-orm';
-import { Pool } from 'pg';
 import cors from 'cors';
 import 'dotenv/config';
-// Schema
-export const ucapan = pgTable('ucapan', {
-  id: serial('id').primaryKey(),
-  nama: varchar('nama', { length: 255 }).notNull(),
-  komentar: text('komentar').notNull(),
-  kehadiran: boolean('kehadiran').notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
+
+// Driver PostgreSQL
+import { drizzle as drizzlePg } from 'drizzle-orm/node-postgres';
+import { pgTable, serial as pgSerial, text as pgText, timestamp as pgTimestamp, boolean as pgBoolean, varchar as pgVarchar } from 'drizzle-orm/pg-core';
+import { Pool } from 'pg';
+
+// Driver MySQL (Laragon)
+import { drizzle as drizzleMysql } from 'drizzle-orm/mysql2';
+import { mysqlTable, serial as mySerial, text as myText, timestamp as myTimestamp, boolean as myBoolean, varchar as myVarchar } from 'drizzle-orm/mysql-core';
+import mysql from 'mysql2/promise';
+
+import { desc } from 'drizzle-orm';
+
+// --- SCHEMA POSTGRES (Untuk Vercel / Neon) ---
+export const ucapanPg = pgTable('ucapan', {
+  id: pgSerial('id').primaryKey(),
+  nama: pgVarchar('nama', { length: 255 }).notNull(),
+  komentar: pgText('komentar').notNull(),
+  kehadiran: pgBoolean('kehadiran').notNull(),
+  createdAt: pgTimestamp('created_at').defaultNow().notNull(),
 });
 
-// Deklarasikan instance Express di luar function agar bisa di-export untuk Vercel Serverless Runtime
+// --- SCHEMA MYSQL (Untuk Laragon Lokal) ---
+export const ucapanMy = mysqlTable('ucapan', {
+  id: mySerial('id').primaryKey(),
+  nama: myVarchar('nama', { length: 255 }).notNull(),
+  komentar: myText('komentar').notNull(),
+  kehadiran: myBoolean('kehadiran').notNull(),
+  createdAt: myTimestamp('created_at').defaultNow().notNull(),
+});
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -24,29 +41,48 @@ app.use(cors());
 app.use(express.json());
 
 async function startServer() {
-  // Database Connection
   const dbUrl = process.env.DATABASE_URL;
-  let db: ReturnType<typeof drizzle> | null = null;
-  let pool: Pool | null = null;
+  let db: any = null;
+  let currentSchema: any = null;
+  const isMysql = dbUrl?.startsWith('mysql://');
 
   if (dbUrl) {
     try {
-      pool = new Pool({
-        connectionString: dbUrl,
-      });
-      db = drizzle(pool);
-      
-      // Auto-migrate table ke Neon Singapore
-      await pool.query(`
-        CREATE TABLE IF NOT EXISTS ucapan (
+      if (isMysql) {
+        // --- KONEKSI MYSQL LOKAL ---
+        const connection = await mysql.createConnection(dbUrl);
+        db = drizzleMysql(connection);
+        currentSchema = ucapanMy;
+
+        // Auto-create table MySQL
+        await connection.query(`
+          CREATE TABLE IF NOT EXISTS ucapan (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nama VARCHAR(255) NOT NULL,
+            komentar TEXT NOT NULL,
+            kehadiran BOOLEAN NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+          );
+        `);
+        console.log('Connected to MySQL Local (Laragon)');
+      } else {
+        // --- KONEKSI POSTGRES VERCEL ---
+        const pool = new Pool({ connectionString: dbUrl });
+        db = drizzlePg(pool);
+        currentSchema = ucapanPg;
+
+        // Auto-create table Postgres
+        await pool.query(`
+          CREATE TABLE IF NOT EXISTS ucapan (
             id SERIAL PRIMARY KEY,
             nama VARCHAR(255) NOT NULL,
             komentar TEXT NOT NULL,
             kehadiran BOOLEAN NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-        );
-      `);
-      console.log('Database initialized successfully');
+          );
+        `);
+        console.log('Connected to PostgreSQL (Neon/Vercel)');
+      }
     } catch (err) {
       console.error('Failed to initialize database:', err);
     }
@@ -58,7 +94,7 @@ async function startServer() {
   app.get('/api/ucapan', async (req, res) => {
     if (!db) return res.status(500).json({ error: 'Database not configured' });
     try {
-      const data = await db.select().from(ucapan).orderBy(desc(ucapan.createdAt));
+      const data = await db.select().from(currentSchema).orderBy(desc(currentSchema.createdAt));
       res.json(data);
     } catch (err) {
       console.error('Error fetching ucapan:', err);
@@ -74,7 +110,7 @@ async function startServer() {
         return res.status(400).json({ error: 'Incomplete data' });
       }
 
-      await db.insert(ucapan).values({
+      await db.insert(currentSchema).values({
         nama,
         komentar,
         kehadiran: Boolean(kehadiran),
@@ -87,20 +123,18 @@ async function startServer() {
     }
   });
 
-  // Routing Static File: Deteksi apakah berjalan di Serverless Vercel atau Local Dev
+  // Routing Static File: Vercel vs Local
   if (process.env.VERCEL === '1' || process.env.NODE_ENV === 'production') {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
-    
+
     app.get('*', (req, res) => {
-      // Mencegah API routing nyasar nge-serve HTML
       if (req.path.startsWith('/api/')) {
         return res.status(404).json({ error: 'API Route Not Found' });
       }
       res.sendFile(path.join(distPath, 'index.html'));
     });
   } else {
-    // Mode Sandbox AI Studio / Local Development biasa
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -108,7 +142,6 @@ async function startServer() {
     app.use(vite.middlewares);
   }
 
-  // Hanya jalankan app.listen jika TIDAK sedang dideploy di Serverless Vercel
   if (process.env.VERCEL !== '1') {
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server running on http://localhost:${PORT}`);
@@ -116,8 +149,6 @@ async function startServer() {
   }
 }
 
-// Jalankan inisialisasi database dan routing middleware
 startServer();
 
-// Wajib diexport agar dibaca dengan benar oleh vercel.json -> @vercel/node
 export default app;
