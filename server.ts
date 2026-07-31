@@ -6,7 +6,7 @@ import { pgTable, serial, text, timestamp, boolean, varchar } from 'drizzle-orm/
 import { desc } from 'drizzle-orm';
 import { Pool } from 'pg';
 import cors from 'cors';
-
+import 'dotenv/config';
 // Schema
 export const ucapan = pgTable('ucapan', {
   id: serial('id').primaryKey(),

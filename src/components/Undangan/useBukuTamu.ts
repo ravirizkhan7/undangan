@@ -33,7 +33,7 @@ export function useBukuTamu() {
 
   useEffect(() => {
     fetchUcapan();
-    const interval = setInterval(fetchUcapanz
+    const interval = setInterval(fetchUcapanz)
   }, [fetchUcapan]);
 
   const submitUcapan = async (nama: string, komentar: string, kehadiran: boolean) => {
