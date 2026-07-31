@@ -33,8 +33,15 @@ export function useBukuTamu() {
 
   useEffect(() => {
     fetchUcapan();
-    const interval = setInterval(fetchUcapan, 4000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(fetchUcapan, 4000);
+    // return () => clearInterval(interval);
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        fetchUcapan(); // Fetch saat user kembali ke tab
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
   }, [fetchUcapan]);
 
   const submitUcapan = async (nama: string, komentar: string, kehadiran: boolean) => {

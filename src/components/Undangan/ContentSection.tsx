@@ -249,7 +249,7 @@ END:VCALENDAR`;
 
           {/* Momen Bahagia 1 Cover */}
           <div className="w-full h-64 sm:h-96 rounded-3xl overflow-hidden relative mb-16 shadow-2xl border border-white/5">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80" alt="Momen" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80" alt="Momen" className="w-full h-full object-cover" loading="lazy" decoding="async"/>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-8">
               <p className="text-amber-50 font-serif italic text-lg text-left drop-shadow-md">
                 "Cinta tidak berupa tatapan satu sama lain, tetapi memandang bersama ke arah yang sama."
