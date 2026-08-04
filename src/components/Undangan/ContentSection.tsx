@@ -78,7 +78,7 @@ END:VCALENDAR`;
                 Nofri deri bachtika
               </h2>
               <p className="text-neutral-400 text-xs sm:text-sm italic font-serif">
-                Putra Pertama dari<br/>Bapak Budi & Ibu Ani
+                Putra Keempat dari<br/>Bapak Bachtiar & Almh Ibu Kasyulidar
               </p>
             </div>
 
@@ -175,7 +175,7 @@ END:VCALENDAR`;
             <div className="bg-gradient-to-bl from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl"></div>
               <h3 className="text-2xl font-serif text-amber-500 mb-2">Resepsi</h3>
-              <p className="text-neutral-300 font-medium mb-1">Sabtu, 5 September 2026</p>
+              <p className="text-neutral-300 font-medium mb-1">Minggu, 6 September 2026</p>
               <p className="text-neutral-400 text-sm mb-6 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-amber-600" />
                 12.00 WIB - Selesai
@@ -384,7 +384,7 @@ END:VCALENDAR`;
           <h3 className="text-2xl font-serif text-amber-50 mb-1">Terima Kasih</h3>
           <p className="text-amber-500 font-medium text-sm mb-12">Dari Kami Yang Berbahagia</p>
           
-          <h2 className="text-4xl font-serif text-white/90">Billar & Rara</h2>
+          <h2 className="text-4xl font-serif text-white/90">Deri & Rania</h2>
           <p className="text-[10px] uppercase text-neutral-600 tracking-[0.3em] mt-16">Exclusive Digital Invitation</p>
         </div>
       </section>
