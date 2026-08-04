@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import BukuTamu from './BukuTamu';
+// import BukuTamu from './BukuTamu';
 import { Copy, CalendarPlus, MapPin, Heart, Clock, Navigation, CheckCircle2 } from 'lucide-react';
 
 export default function ContentSection() {
-  const weddingDateStr = "2026-10-10T09:00:00+07:00"; // Statis 10 Okt 2026
+  const weddingDateStr = "2026-09-05T09:00:00+07:00"; // Statis 5 Okt 2026
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [isCopied, setIsCopied] = useState(false);
 
@@ -46,9 +46,9 @@ BEGIN:VEVENT
 DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'}
 DTSTART:20261010T020000Z
 DTEND:20261010T050000Z
-SUMMARY:Pernikahan Billar & Rara
-DESCRIPTION:Acara Akad dan Resepsi Pernikahan Billar & Rara.
-LOCATION:Hotel Keren Jakarta
+SUMMARY:Pernikahan Deri & Rania
+DESCRIPTION:Acara Akad dan Resepsi Pernikahan Deri & Rania.
+LOCATION:Lubuk Aro Tapakis
 END:VEVENT
 END:VCALENDAR`;
 
@@ -75,7 +75,7 @@ END:VCALENDAR`;
             {/* PRIA ZIG ZAG - Kiri */}
             <div className="text-left w-full pl-4 md:pl-0">
               <h2 className="text-4xl sm:text-5xl font-serif text-amber-50 mb-2 drop-shadow-lg">
-                Billar Saputra
+                Nofri deri bachtika
               </h2>
               <p className="text-neutral-400 text-xs sm:text-sm italic font-serif">
                 Putra Pertama dari<br/>Bapak Budi & Ibu Ani
@@ -92,7 +92,7 @@ END:VCALENDAR`;
             {/* WANITA ZIG ZAG - Kanan */}
             <div className="text-right w-full pr-4 md:pr-0 self-end">
               <h2 className="text-4xl sm:text-5xl font-serif text-amber-50 mb-2 drop-shadow-lg">
-                Rara LIDA
+                Rania dhelviena
               </h2>
               <p className="text-neutral-400 text-xs sm:text-sm italic font-serif">
                 Putri Bungsu dari<br/>Bapak Anto & Ibu Tini
@@ -102,9 +102,15 @@ END:VCALENDAR`;
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-70">
+        <div
+          className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-70"
+          style={{ bottom: 0 }}
+        >
           <span className="text-[10px] uppercase tracking-widest text-neutral-400 mb-2">Scroll</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-amber-500 to-transparent"></div>
+          <div
+            className="w-[1px] bg-gradient-to-b from-amber-500 to-transparent"
+            style={{ height: 'clamp(1.25rem, 4dvh, 2rem)' }}
+          ></div>
         </div>
       </section>
 
@@ -140,7 +146,7 @@ END:VCALENDAR`;
             <div className="bg-gradient-to-br from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl"></div>
               <h3 className="text-2xl font-serif text-amber-500 mb-2">Akad Nikah</h3>
-              <p className="text-neutral-300 font-medium mb-1">Sabtu, 10 Oktober 2026</p>
+              <p className="text-neutral-300 font-medium mb-1">Sabtu, 5 September 2026</p>
               <p className="text-neutral-400 text-sm mb-6 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-amber-600" />
                 09.00 WIB - Selesai
@@ -151,12 +157,12 @@ END:VCALENDAR`;
                   <MapPin className="w-4 h-4 text-amber-500" /> Masjid Agung Jakarta
                 </p>
                 <p className="text-xs text-neutral-400 leading-relaxed">
-                  Jl. Sudirman No 123, Jakarta Pusat, DKI Jakarta
+                  Lubuk Aro Tapakis
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="https://maps.google.com/?q=Masjid+Agung+Jakarta" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                <a href="https://maps.app.goo.gl/rmUrSCZvU5kMHowR8?g_st=awb" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
                   <Navigation className="w-4 h-4 text-blue-400" /> Google Maps
                 </a>
                 <a href="maps://?q=Masjid+Agung+Jakarta" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
@@ -169,7 +175,7 @@ END:VCALENDAR`;
             <div className="bg-gradient-to-bl from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl"></div>
               <h3 className="text-2xl font-serif text-amber-500 mb-2">Resepsi</h3>
-              <p className="text-neutral-300 font-medium mb-1">Sabtu, 10 Oktober 2026</p>
+              <p className="text-neutral-300 font-medium mb-1">Sabtu, 5 September 2026</p>
               <p className="text-neutral-400 text-sm mb-6 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-amber-600" />
                 12.00 WIB - Selesai
@@ -180,12 +186,12 @@ END:VCALENDAR`;
                   <MapPin className="w-4 h-4 text-amber-500" /> Hotel Indonesia Kempinski
                 </p>
                 <p className="text-xs text-neutral-400 leading-relaxed">
-                  Jl. M.H. Thamrin No.1, Jakarta Pusat, DKI Jakarta
+                  Lubuk Aro Tapakis
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="https://maps.google.com/?q=Hotel+Indonesia+Kempinski+Jakarta" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                <a href="https://maps.app.goo.gl/rmUrSCZvU5kMHowR8?g_st=awb" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
                   <Navigation className="w-4 h-4 text-blue-400" /> Google Maps
                 </a>
                 <a href="maps://?q=Hotel+Indonesia+Kempinski+Jakarta" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
@@ -366,7 +372,7 @@ END:VCALENDAR`;
       </section>
 
       {/* G. KONFIRMASI KEHADIRAN & BUKUTAMU */}
-      <BukuTamu />
+      {/* <BukuTamu /> */}
 
       {/* H. UCAPAN TERIMA KASIH (FOOTER) */}
       <section className="relative w-full py-20 px-6 flex justify-center bg-black text-center border-t border-white/5">

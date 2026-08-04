@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import wallpaper from '../../../assets/img/3.jpeg';
 
 interface WelcomingCardProps {
   onOpen: () => void;
@@ -9,17 +10,16 @@ interface WelcomingCardProps {
 export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCardProps) {
   return (
     <div
-      className={`fixed inset-0 z-40 transition-colors duration-[1500ms] ease-[cubic-bezier(0.87,0,0.13,1)] ${
+      className={`fixed inset-0 z-40 h-dvh transition-colors duration-[1500ms] ease-[cubic-bezier(0.87,0,0.13,1)] ${
         isOpen ? 'bg-transparent pointer-events-none' : 'bg-neutral-950'
       }`}
     >
-      <div className={`absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80')] bg-cover bg-center transition-opacity duration-[1500ms] mix-blend-overlay ${isOpen ? 'opacity-0' : 'opacity-30'}`}></div>
       
       {/* The expanding photo */}
       <div 
         className={`absolute z-0 overflow-hidden transition-all duration-[1500ms] ease-[cubic-bezier(0.87,0,0.13,1)] ${
           isOpen 
-            ? 'w-[100vw] h-[100vh] rounded-none top-[50%]' 
+            ? 'w-[100vw] h-[100dvh] rounded-none top-[50%]' 
             : 'w-44 h-[16rem] sm:w-60 sm:h-[20rem] rounded-[80px] top-[40%]'
         }`}
         style={{
@@ -28,7 +28,7 @@ export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCa
         }}
       >
         <img 
-          src="https://media.kompas.tv/library/image/content_article/article_img/20211109223756.jpg" 
+          src={wallpaper} 
           alt="Couple"
           className="w-full h-full object-cover"
         />
@@ -65,7 +65,7 @@ export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCa
         }}
       >
         <h1 className="text-4xl sm:text-5xl font-serif text-white font-light tracking-wide mb-1 drop-shadow-lg">
-          Billar <span className="text-amber-500 font-sans italic mx-1">&</span> Rara
+          Deri <span className="text-amber-500 font-sans italic mx-1">&</span> Rania
         </h1>
         <p className="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold mb-4 sm:mb-6 italic drop-shadow-md">
           Opening Sequence
