@@ -372,7 +372,7 @@ END:VCALENDAR`;
       </section>
 
       {/* G. KONFIRMASI KEHADIRAN & BUKUTAMU */}
-      <BukuTamu />
+      {/* <BukuTamu /> */}
 
       {/* H. UCAPAN TERIMA KASIH (FOOTER) */}
       <section className="relative w-full py-20 px-6 flex justify-center bg-black text-center border-t border-white/5">
