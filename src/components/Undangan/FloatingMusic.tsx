@@ -1,73 +1,81 @@
-import { useState, useRef, useEffect } from 'react';
-import { Music, Pause } from 'lucide-react';
-import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from "react";
+import { Music, Pause } from "lucide-react";
+import { motion } from "motion/react";
 
 export default function FloatingMusic() {
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const autoplayFallbackRef = useRef<(() => void) | null>(null);
-  const bgsound = "/assets/bg-sound.mp3";
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    audioRef.current = new Audio(bgsound);
-    audioRef.current.loop = true;
+    const audio = new Audio("/assets/bg-sound.mp3");
 
-    // Coba autoplay langsung
-    audioRef.current.play()
-      .then(() => {
-        setIsPlaying(true);
-      })
-      .catch(() => {
-        // Browser block autoplay → tunggu interaksi pertama user
-        const handleFirstInteraction = () => {
-          if (audioRef.current && !audioRef.current.paused === false) {
-            audioRef.current.play()
-              .then(() => setIsPlaying(true))
-              .catch(() => {});
-          }
-          document.removeEventListener('click', handleFirstInteraction);
-          document.removeEventListener('touchstart', handleFirstInteraction);
-          autoplayFallbackRef.current = null;
-        };
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.volume = 0.5;
 
-        autoplayFallbackRef.current = handleFirstInteraction;
-        document.addEventListener('click', handleFirstInteraction);
-        document.addEventListener('touchstart', handleFirstInteraction);
-      });
+    audioRef.current = audio;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+
+    // Browser block autoplay? Tunggu interaksi pertama user.
+    const startAudio = async () => {
+      try {
+        await audio.play();
+      } catch {
+        // ignore
+      }
+    };
+
+    startAudio();
+
+    const handleFirstInteraction = async () => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+        } catch {}
+      }
+
+      document.removeEventListener("pointerdown", handleFirstInteraction);
+    };
+
+    document.addEventListener("pointerdown", handleFirstInteraction, {
+      once: true,
+    });
 
     return () => {
-      audioRef.current?.pause();
-      // Cleanup fallback listener kalau masih terpasang
-      if (autoplayFallbackRef.current) {
-        document.removeEventListener('click', autoplayFallbackRef.current);
-        document.removeEventListener('touchstart', autoplayFallbackRef.current);
-      }
+      audio.pause();
+      audio.currentTime = 0;
+
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+
+      document.removeEventListener(
+        "pointerdown",
+        handleFirstInteraction
+      );
     };
   }, []);
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     if (!audioRef.current) return;
 
-    // Kalau user klik button dan fallback listener masih aktif, hapus dulu
-    if (autoplayFallbackRef.current) {
-      document.removeEventListener('click', autoplayFallbackRef.current);
-      document.removeEventListener('touchstart', autoplayFallbackRef.current);
-      autoplayFallbackRef.current = null;
-    }
-
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play().catch(e => console.error("Audio playback failed", e));
-      setIsPlaying(true);
+    try {
+      if (audioRef.current.paused) {
+        await audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
   return (
-    // ✅ z-[9999] biar pasti di depan semua elemen
     <div className="fixed top-6 left-0 right-0 px-6 z-[9999] flex justify-between items-start pointer-events-none">
-      {/* Badge "Exclusive Preview" */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -75,12 +83,12 @@ export default function FloatingMusic() {
         className="pointer-events-auto bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-2"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+
         <span className="text-[10px] font-medium tracking-widest text-amber-100/90 uppercase">
           Exclusive Preview
         </span>
       </motion.div>
 
-      {/* Floating Audio Button */}
       <motion.button
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
