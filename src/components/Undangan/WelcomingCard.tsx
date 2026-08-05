@@ -1,5 +1,4 @@
 import { motion } from 'motion/react';
-import wallpaper from "/assets/img/3.JPEG";
 
 interface WelcomingCardProps {
   onOpen: () => void;
@@ -8,6 +7,7 @@ interface WelcomingCardProps {
 }
 
 export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCardProps) {
+  const wallpaper = "/assets/img/3.JPEG";
   return (
     <div
       className={`fixed inset-0 z-40 h-dvh transition-colors duration-[1500ms] ease-[cubic-bezier(0.87,0,0.13,1)] ${
