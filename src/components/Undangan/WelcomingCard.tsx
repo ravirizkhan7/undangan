@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import wallpaper from './assets/img/3.JPEG';
+import wallpaper from '/assets/img/3.JPEG';
 
 interface WelcomingCardProps {
   onOpen: () => void;
