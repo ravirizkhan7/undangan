@@ -81,7 +81,10 @@ export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCa
         </div>
 
         <button
-          onClick={onOpen}
+          onClick={() => {
+            window.dispatchEvent(new Event("start-music"));
+            onOpen();
+          }}
           className="w-[80%] sm:w-auto min-w-[200px] py-3.5 px-8 bg-white text-black text-xs font-black uppercase tracking-widest rounded-xl hover:bg-amber-500 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.1)]"
         >
           Buka Undangan

@@ -21,30 +21,18 @@ export default function FloatingMusic() {
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
 
-    // Browser block autoplay? Tunggu interaksi pertama user.
-    const startAudio = async () => {
+    // Event dari tombol "Buka Undangan"
+    const handleStartMusic = async () => {
       try {
-        await audio.play();
-      } catch {
-        // ignore
-      }
-    };
-
-    startAudio();
-
-    const handleFirstInteraction = async () => {
-      if (audio.paused) {
-        try {
+        if (audio.paused) {
           await audio.play();
-        } catch {}
+        }
+      } catch (err) {
+        console.log(err);
       }
-
-      document.removeEventListener("pointerdown", handleFirstInteraction);
     };
 
-    document.addEventListener("pointerdown", handleFirstInteraction, {
-      once: true,
-    });
+    window.addEventListener("start-music", handleStartMusic);
 
     return () => {
       audio.pause();
@@ -53,10 +41,7 @@ export default function FloatingMusic() {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
 
-      document.removeEventListener(
-        "pointerdown",
-        handleFirstInteraction
-      );
+      window.removeEventListener("start-music", handleStartMusic);
     };
   }, []);
 
@@ -69,8 +54,8 @@ export default function FloatingMusic() {
       } else {
         audioRef.current.pause();
       }
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -82,7 +67,7 @@ export default function FloatingMusic() {
         transition={{ duration: 1, delay: 0.5 }}
         className="pointer-events-auto bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-2"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
 
         <span className="text-[10px] font-medium tracking-widest text-amber-100/90 uppercase">
           Exclusive Preview
