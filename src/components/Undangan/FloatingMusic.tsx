@@ -12,6 +12,7 @@ export default function FloatingMusic() {
     audioRef.current = new Audio(bgsound);
     audioRef.current.loop = true;
 
+    
     // Coba autoplay langsung
     audioRef.current.play()
       .then(() => {
