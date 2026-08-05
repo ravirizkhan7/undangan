@@ -262,7 +262,7 @@ END:VCALENDAR`;
             <div className="flex flex-col md:flex-row gap-8 items-center text-left">
               <div className="w-full md:w-1/2 shrink-0">
                 <div className="w-full aspect-square rounded-full overflow-hidden border-4 border-neutral-900 shadow-xl max-w-[250px] mx-auto md:mx-0">
-                  <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80" alt="Pertama bertemu" className="w-full h-full object-cover" />
+                  <img src="/assets/img/2.JPEG" alt="Pertama bertemu" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="w-full md:w-1/2">
@@ -278,7 +278,7 @@ END:VCALENDAR`;
             <div className="flex flex-col md:flex-row-reverse gap-8 items-center text-left md:text-right">
               <div className="w-full md:w-1/2 shrink-0">
                 <div className="w-full aspect-square rounded-full overflow-hidden border-4 border-neutral-900 shadow-xl max-w-[250px] mx-auto md:ml-auto">
-                  <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80" alt="Pacaran" className="w-full h-full object-cover" />
+                  <img src="/assets/img/4.JPEG" alt="Pacaran" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="w-full md:w-1/2">
@@ -294,7 +294,7 @@ END:VCALENDAR`;
             <div className="flex flex-col md:flex-row gap-8 items-center text-left">
               <div className="w-full md:w-1/2 shrink-0">
                 <div className="w-full aspect-square rounded-full overflow-hidden border-4 border-neutral-900 shadow-xl max-w-[250px] mx-auto md:mx-0">
-                  <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80" alt="Lamaran" className="w-full h-full object-cover" />
+                  <img src="/assets/img/5.JPEG" alt="Lamaran" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="w-full md:w-1/2">
