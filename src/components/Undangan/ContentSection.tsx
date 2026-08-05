@@ -154,7 +154,7 @@ END:VCALENDAR`;
               
               <div className="mb-8 p-4 bg-white/5 rounded-2xl border border-white/10">
                 <p className="font-medium text-neutral-200 mb-1 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-amber-500" /> Masjid Agung Jakarta
+                  <MapPin className="w-4 h-4 text-amber-500" /> Rumah Mempelai Wanita
                 </p>
                 <p className="text-xs text-neutral-400 leading-relaxed">
                   Lubuk Aro Tapakis
@@ -164,9 +164,6 @@ END:VCALENDAR`;
               <div className="flex flex-col sm:flex-row gap-3">
                 <a href="https://maps.app.goo.gl/rmUrSCZvU5kMHowR8?g_st=awb" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
                   <Navigation className="w-4 h-4 text-blue-400" /> Google Maps
-                </a>
-                <a href="maps://?q=Masjid+Agung+Jakarta" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
-                  <Navigation className="w-4 h-4 text-neutral-300" /> Apple Maps
                 </a>
               </div>
             </div>
@@ -183,7 +180,7 @@ END:VCALENDAR`;
               
               <div className="mb-8 p-4 bg-white/5 rounded-2xl border border-white/10">
                 <p className="font-medium text-neutral-200 mb-1 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-amber-500" /> Hotel Indonesia Kempinski
+                  <MapPin className="w-4 h-4 text-amber-500" /> Rumah Mempelai Wanita
                 </p>
                 <p className="text-xs text-neutral-400 leading-relaxed">
                   Lubuk Aro Tapakis
@@ -193,9 +190,6 @@ END:VCALENDAR`;
               <div className="flex flex-col sm:flex-row gap-3">
                 <a href="https://maps.app.goo.gl/rmUrSCZvU5kMHowR8?g_st=awb" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
                   <Navigation className="w-4 h-4 text-blue-400" /> Google Maps
-                </a>
-                <a href="maps://?q=Hotel+Indonesia+Kempinski+Jakarta" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
-                  <Navigation className="w-4 h-4 text-neutral-300" /> Apple Maps
                 </a>
               </div>
             </div>
@@ -255,7 +249,7 @@ END:VCALENDAR`;
 
           {/* Momen Bahagia 1 Cover */}
           <div className="w-full h-64 sm:h-96 rounded-3xl overflow-hidden relative mb-16 shadow-2xl border border-white/5">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80" alt="Momen" className="w-full h-full object-cover" loading="lazy" decoding="async"/>
+            <img src="/assets/img/7.JPEG" alt="Momen" className="w-full h-full object-cover" loading="lazy" decoding="async"/>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-8">
               <p className="text-amber-50 font-serif italic text-lg text-left drop-shadow-md">
                 "Cinta tidak berupa tatapan satu sama lain, tetapi memandang bersama ke arah yang sama."
