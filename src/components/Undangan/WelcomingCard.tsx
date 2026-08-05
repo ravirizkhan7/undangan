@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import wallpaper from '../../../assets/img/3.jpeg';
+// import wallpaper from '../../../assets/img/3.jpeg';
 
 interface WelcomingCardProps {
   onOpen: () => void;
@@ -28,7 +28,7 @@ export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCa
         }}
       >
         <img 
-          src={wallpaper} 
+          src={'/assets/img/3.jpeg'} 
           alt="Couple"
           className="w-full h-full object-cover"
         />
