@@ -7,7 +7,7 @@ export default function FloatingMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const audio = new Audio("/assets/bg-sound.mp3");
+    const audio = new Audio("/assets/u.mp3");
 
     audio.loop = true;
     audio.preload = "auto";
