@@ -346,7 +346,7 @@ END:VCALENDAR`;
             <div className="flex justify-between items-start">
               <div>
                 <p className="text-sm font-semibold text-amber-400 mb-1">Rania (Penerima)</p>
-                <p className="text-xs text-neutral-400 mb-2">083161054656</p>
+                <p className="text-xs text-neutral-400 mb-2">+62 822-8725-6103</p>
                 <p className="text-xs text-neutral-400 leading-relaxed max-w-[250px]">
                   lubuk aro tapakis, dekat rumah sakit patah tulang Tapakis, ulakan Tapakis. Tapakis, ulakan Tapakis, kabupaten Padang Pariaman
                 </p>
