@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Copy, CalendarPlus, MapPin, Heart, Clock, Navigation, CheckCircle2 } from 'lucide-react';
 
 export default function ContentSection() {
-  const weddingDateStr = "2026-09-05T09:00:00+07:00"; // Statis 5 Okt 2026
+  const weddingDateStr = "2026-10-05T09:00:00+07:00"; // Statis 5 Okt 2026
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [isCopied, setIsCopied] = useState(false);
 
@@ -172,7 +172,7 @@ END:VCALENDAR`;
             <div className="bg-gradient-to-bl from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl"></div>
               <h3 className="text-2xl font-serif text-amber-500 mb-2">Resepsi</h3>
-              <p className="text-neutral-300 font-medium mb-1">Minggu, 6 September 2026</p>
+              <p className="text-neutral-300 font-medium mb-1">Senin, 5 Oktober 2026</p>
               <p className="text-neutral-400 text-sm mb-6 flex items-center gap-2">
                 <Clock className="w-4 h-4 text-amber-600" />
                 12.00 WIB - Selesai
