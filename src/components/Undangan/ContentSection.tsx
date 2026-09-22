@@ -32,8 +32,13 @@ export default function ContentSection() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleCopyRekening = async () => {
-    await navigator.clipboard.writeText("123456789012");
+  const handleCopyRekening1 = async () => {
+    await navigator.clipboard.writeText("335401047764536");
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+  const handleCopyRekening2 = async () => {
+    await navigator.clipboard.writeText("548901001016502");
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
@@ -41,21 +46,21 @@ export default function ContentSection() {
   const handleDownloadICS = () => {
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Billar & Rara Wedding//ID
+PRODID:-//Rezki & Sukma Wedding//ID
 BEGIN:VEVENT
 DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'}
 DTSTART:20261010T020000Z
 DTEND:20261010T050000Z
-SUMMARY:Pernikahan Deri & Rania
-DESCRIPTION:Acara Akad dan Resepsi Pernikahan Deri & Rania.
-LOCATION:Lubuk Aro Tapakis
+SUMMARY:Pernikahan Rezki & Sukma
+DESCRIPTION:Acara Resepsi Pernikahan Rezki & Sukma
+LOCATION:Kampung paneh  pakandangan, Enam Lingkung kab Padang Pariaman, Sumatera Barat
 END:VEVENT
 END:VCALENDAR`;
 
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
-    link.setAttribute('download', 'Pernikahan_Billar_Rara.ics');
+    link.setAttribute('download', 'Pernikahan_Rezki_Sukma.ics');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -215,12 +220,12 @@ END:VCALENDAR`;
             </div>
 
             {/* Item 2 */}
-            <div className="relative pl-8 md:pl-0 md:w-[50%] md:pl-12 md:self-end mb-14 md:text-left group">
+            {/* <div className="relative pl-8 md:pl-0 md:w-[50%] md:pl-12 md:self-end mb-14 md:text-left group">
               <div className="absolute left-[-5px] md:left-0 md:-translate-x-1/2 top-1 w-3 h-3 bg-amber-500 rounded-full border-2 border-neutral-950 group-hover:scale-150 transition-transform shadow-[0_0_10px_rgba(217,119,6,1)]"></div>
               <h4 className="text-xl font-serif text-amber-300 mb-1">Prosesi Akad</h4>
               <p className="text-sm font-medium text-neutral-300 mb-2">09:00 WIB</p>
               <p className="text-xs text-neutral-500 leading-relaxed">Pembacaan ijab kabul yang khidmat disaksikan oleh saksi dan keluarga.</p>
-            </div>
+            </div> */}
 
             {/* Item 3 */}
             <div className="relative pl-8 md:pl-0 md:w-[50%] md:pr-12 md:self-start mb-14 md:text-right group">
@@ -333,7 +338,31 @@ END:VCALENDAR`;
             </div>
             
             <button 
-              onClick={handleCopyRekening}
+              onClick={handleCopyRekening1}
+              className="absolute bottom-6 right-6 w-10 h-10 bg-amber-500/20 hover:bg-amber-500/40 rounded-full flex items-center justify-center transition-colors z-20 pointer-events-auto cursor-pointer"
+              title="Salin Rekening"
+            >
+              {isCopied ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-amber-500" />}
+            </button>
+          </div>
+          <div className="relative w-[320px] sm:w-[380px] h-[200px] mx-auto rounded-2xl bg-gradient-to-br from-neutral-800 via-neutral-900 to-black p-6 flex flex-col justify-between shadow-2xl border border-white/10 overflow-hidden mb-8">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl"></div>
+            
+            <div className="flex justify-between items-start z-10 w-full">
+              <span className="text-amber-400 font-bold italic tracking-widest text-lg">BRI</span>
+              <svg className="w-8 h-8 text-amber-600/50" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+            </div>
+
+            <div className="z-10 text-left">
+              <p className="text-xs text-neutral-500 uppercase tracking-widest mb-1">No. Rekening</p>
+              <h3 className="text-2xl font-mono text-white tracking-[0.2em] mb-4">548901001016502</h3>
+              <p className="text-sm text-neutral-300 font-medium uppercase tracking-wider">Rezki Tanjung</p>
+            </div>
+            
+            <button 
+              onClick={handleCopyRekening2}
               className="absolute bottom-6 right-6 w-10 h-10 bg-amber-500/20 hover:bg-amber-500/40 rounded-full flex items-center justify-center transition-colors z-20 pointer-events-auto cursor-pointer"
               title="Salin Rekening"
             >
