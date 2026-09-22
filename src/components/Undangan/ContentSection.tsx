@@ -75,10 +75,10 @@ END:VCALENDAR`;
             {/* PRIA ZIG ZAG - Kiri */}
             <div className="text-left w-full pl-4 md:pl-0">
               <h2 className="text-4xl sm:text-5xl font-serif text-amber-50 mb-2 drop-shadow-lg">
-                Nofri deri bachtika
+                Rezki Tanjung
               </h2>
               <p className="text-neutral-400 text-xs sm:text-sm italic font-serif">
-                Putra Keempat dari<br/>Bapak Bachtiar & Almh Ibu Kasyulidar
+                Putra Ke tiga dari<br/>Bapak Zulkifli & Ibu Nurbayani
               </p>
             </div>
 
@@ -92,10 +92,10 @@ END:VCALENDAR`;
             {/* WANITA ZIG ZAG - Kanan */}
             <div className="text-right w-full pr-4 md:pr-0 self-end">
               <h2 className="text-4xl sm:text-5xl font-serif text-amber-50 mb-2 drop-shadow-lg">
-                Rania dhelviena
+                Sukma Nuriyanti S.E
               </h2>
               <p className="text-neutral-400 text-xs sm:text-sm italic font-serif">
-                Putri Bungsu dari<br/>Alm. Datuk Enek & Ibu Pohok
+                Putri Ke tiga dari<br/>Bapak Thamrin & Ibu Fitri Malia
               </p>
             </div>
           </div>
@@ -143,7 +143,7 @@ END:VCALENDAR`;
         <div className="max-w-4xl w-full z-10">
           <div className="grid md:grid-cols-2 gap-8">
             {/* AKAD */}
-            <div className="bg-gradient-to-br from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
+            {/* <div className="bg-gradient-to-br from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl"></div>
               <h3 className="text-2xl font-serif text-amber-500 mb-2">Akad Nikah</h3>
               <p className="text-neutral-300 font-medium mb-1">Sabtu, 5 September 2026</p>
@@ -166,7 +166,7 @@ END:VCALENDAR`;
                   <Navigation className="w-4 h-4 text-blue-400" /> Google Maps
                 </a>
               </div>
-            </div>
+            </div> */}
 
             {/* RESEPSI */}
             <div className="bg-gradient-to-bl from-neutral-900 to-black border border-white/5 p-8 rounded-3xl shadow-xl relative overflow-hidden">
@@ -180,15 +180,15 @@ END:VCALENDAR`;
               
               <div className="mb-8 p-4 bg-white/5 rounded-2xl border border-white/10">
                 <p className="font-medium text-neutral-200 mb-1 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-amber-500" /> Rumah Mempelai Wanita
+                  <MapPin className="w-4 h-4 text-amber-500" /> Rumah Mempelai Pria
                 </p>
                 <p className="text-xs text-neutral-400 leading-relaxed">
-                  Lubuk Aro Tapakis
+                  Kampung paneh  pakandangan, Enam Lingkung kab Padang Pariaman, Sumatera Barat
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="https://maps.app.goo.gl/rmUrSCZvU5kMHowR8?g_st=awb" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                <a href="https://maps.app.goo.gl/TF15ysB2KWxhXZiA7?g_st=ic" target="_blank" rel="noopener noreferrer" className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white text-xs font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-colors">
                   <Navigation className="w-4 h-4 text-blue-400" /> Google Maps
                 </a>
               </div>
@@ -249,7 +249,7 @@ END:VCALENDAR`;
 
           {/* Momen Bahagia 1 Cover */}
           <div className="w-full h-64 sm:h-96 rounded-3xl overflow-hidden relative mb-16 shadow-2xl border border-white/5">
-            <img src="/assets/img/7.JPEG" alt="Momen" className="w-full h-full object-cover" loading="lazy" decoding="async"/>
+            <img src="/assets/img/5.JPEG" alt="Momen" className="w-full h-full object-cover" loading="lazy" decoding="async"/>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-8">
               <p className="text-amber-50 font-serif italic text-lg text-left drop-shadow-md">
                 "Cinta tidak berupa tatapan satu sama lain, tetapi memandang bersama ke arah yang sama."
@@ -266,10 +266,10 @@ END:VCALENDAR`;
                 </div>
               </div>
               <div className="w-full md:w-1/2">
-                <span className="text-amber-500 font-mono text-sm mb-2 block">2025 - Awal Berjumpa</span>
+                <span className="text-amber-500 font-mono text-sm mb-2 block">2022 - Awal Pertemuan</span>
                 <h3 className="text-2xl font-serif text-white mb-3">Pandangan Pertama</h3>
                 <p className="text-neutral-400 text-sm leading-relaxed">
-                  Pertama kali bertemu bukan di tempat mewah, hanya di teras rumahnya sambil menunggu jahitan selesai. Tapi dari obrolan kecil dan chat yang panjang, Tuhan menenun kisah kami sampai ke pelaminan.
+                  Pertama kali kami ketemu di bulan Januari pulau sirandah dimna aku pergi holiday sama temen2 kampus dan dia jadi turgait nya singkat nya dimalam hari kami ngobrol didepan api unggun kenal satu sama lain dan merencanakan naik gunung bareng setelah ini.
                 </p>
               </div>
             </div>
@@ -282,10 +282,10 @@ END:VCALENDAR`;
                 </div>
               </div>
               <div className="w-full md:w-1/2">
-                <span className="text-amber-500 font-mono text-sm mb-2 block">2025 - Menjalin Kasih</span>
+                <span className="text-amber-500 font-mono text-sm mb-2 block">Februari 2022 - Menjalin Kasih</span>
                 <h3 className="text-2xl font-serif text-white mb-3">Semakin Dekat & Tumbuh</h3>
                 <p className="text-neutral-400 text-sm leading-relaxed">
-                  Satu tahun mengenal, melewati berbagai musim kehidupan bersama. Kami belajar memahami ego masing-masing, tertawa menangis, hingga akhirnya yakin bahwa kami saling melengkapi
+                  Kami memutuskan kan mempunyai hubungan dan emang sudah sepakat untuk serius segala bentuk obrolan dibahas mengenal kebiasaan, sifat ego satu sama lain dan memahami kelebihan dan kekurangan satu sama lain.
                 </p>
               </div>
             </div>
@@ -294,14 +294,14 @@ END:VCALENDAR`;
             <div className="flex flex-col md:flex-row gap-8 items-center text-left">
               <div className="w-full md:w-1/2 shrink-0">
                 <div className="w-full aspect-square rounded-full overflow-hidden border-4 border-neutral-900 shadow-xl max-w-[250px] mx-auto md:mx-0">
-                  <img src="/assets/img/5.JPEG" alt="Lamaran" className="w-full h-full object-cover" />
+                  <img src="/assets/img/1.JPEG" alt="Lamaran" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="w-full md:w-1/2">
                 <span className="text-amber-500 font-mono text-sm mb-2 block">2026 - Memutuskan</span>
                 <h3 className="text-2xl font-serif text-white mb-3">Langkah Menuju Halal</h3>
                 <p className="text-neutral-400 text-sm leading-relaxed">
-                  Dia datang ke rumah dengan keberanian, mengucap janji suci di depan orang tua. Kami memutuskan mengikat ikatan di bawah ridho Ilahi.
+                  Setelah perjalanan yg cukup panjang bukanlah mudah bagi kami cobaan di hubungan restu orang tua semuanya kami lewati bareng2 sampai kami di tujuan yg sama dan pulang dirumah yg sama.
                 </p>
               </div>
             </div>
@@ -320,7 +320,7 @@ END:VCALENDAR`;
             <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl"></div>
             
             <div className="flex justify-between items-start z-10 w-full">
-              <span className="text-amber-400 font-bold italic tracking-widest text-lg">Dana</span>
+              <span className="text-amber-400 font-bold italic tracking-widest text-lg">BRI</span>
               <svg className="w-8 h-8 text-amber-600/50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
               </svg>
@@ -328,8 +328,8 @@ END:VCALENDAR`;
 
             <div className="z-10 text-left">
               <p className="text-xs text-neutral-500 uppercase tracking-widest mb-1">No. Rekening</p>
-              <h3 className="text-2xl font-mono text-white tracking-[0.2em] mb-4">083161054656</h3>
-              <p className="text-sm text-neutral-300 font-medium uppercase tracking-wider">Widia Aprilianti</p>
+              <h3 className="text-2xl font-mono text-white tracking-[0.2em] mb-4">335401047764536</h3>
+              <p className="text-sm text-neutral-300 font-medium uppercase tracking-wider">Sukma Nuriyanti</p>
             </div>
             
             <button 
@@ -345,10 +345,10 @@ END:VCALENDAR`;
             <h4 className="text-neutral-200 font-medium mb-3 border-b border-white/10 pb-2">Kirim Kado Fisik</h4>
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-sm font-semibold text-amber-400 mb-1">Rania (Penerima)</p>
-                <p className="text-xs text-neutral-400 mb-2">+62 822-8725-6103</p>
+                <p className="text-sm font-semibold text-amber-400 mb-1">Sukma (Penerima)</p>
+                <p className="text-xs text-neutral-400 mb-2">+62 822-8431-4949</p>
                 <p className="text-xs text-neutral-400 leading-relaxed max-w-[250px]">
-                  lubuk aro tapakis, dekat rumah sakit patah tulang Tapakis, ulakan Tapakis. Tapakis, ulakan Tapakis, kabupaten Padang Pariaman
+                  Kampung paneh  pakandangan, Enam Lingkung kab Padang Pariaman, Sumatera Barat
                 </p>
               </div>
               <button 
@@ -378,7 +378,7 @@ END:VCALENDAR`;
           <h3 className="text-2xl font-serif text-amber-50 mb-1">Terima Kasih</h3>
           <p className="text-amber-500 font-medium text-sm mb-12">Dari Kami Yang Berbahagia</p>
           
-          <h2 className="text-4xl font-serif text-white/90">Deri & Rania</h2>
+          <h2 className="text-4xl font-serif text-white/90">Rezki & Sukma</h2>
           <p className="text-[10px] uppercase text-neutral-600 tracking-[0.3em] mt-16">Exclusive Digital Invitation</p>
         </div>
       </section>

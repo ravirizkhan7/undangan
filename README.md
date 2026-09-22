@@ -18,3 +18,6 @@ View your app in AI Studio: https://ai.studio/apps/a4b9d5f1-289a-4c62-8ea3-dc021
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+ini untuk react yg eror
+npm install --save-dev @types/react @types/react-dom
+"types": ["vite/client", "react", "react-dom"],

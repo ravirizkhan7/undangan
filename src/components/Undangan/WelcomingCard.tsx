@@ -65,7 +65,7 @@ export default function WelcomingCard({ onOpen, isOpen, guestName }: WelcomingCa
         }}
       >
         <h1 className="text-4xl sm:text-5xl font-serif text-white font-light tracking-wide mb-1 drop-shadow-lg">
-          Deri <span className="text-amber-500 font-sans italic mx-1">&</span> Rania
+          Rezki <span className="text-amber-500 font-sans italic mx-1">&</span> Sukma
         </h1>
         <p className="text-[10px] uppercase tracking-[0.3em] text-amber-500 font-bold mb-4 sm:mb-6 italic drop-shadow-md">
           Opening Sequence
